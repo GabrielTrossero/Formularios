@@ -2,6 +2,10 @@
     <div class="form-group">
         <label>Nombre</label>
         <input type="text" class="form-control" formControlName="nombre">
+        <div>
+            <!--Indica si el campo es válido-->
+            <p>Valid: {{ formulario.controls.nombre.valid }}</p>
+        </div>
     </div>
     <div class="form-group">
         <label>Apellido</label>
@@ -27,7 +31,15 @@
         <label>Repite Password</label>
         <input type="password" class="form-control" formControlName="repite_password">
     </div>
-    <input type="submit" value="Enviar" class="btn btn-primary">
+    <!--El botón se habilita cuando el formulario es válido-->
+    <input type="submit" value="Enviar" class="btn btn-primary" [disabled]="!formulario.valid">
 </form>
 
 {{formulario.value | json}}
+
+<div>
+    <p>Valido: {{ formulario.valid }}</p>
+    <p>Invalido: {{ formulario.invalid }}</p>
+    <p>Dirty: {{ formulario.dirty }}</p>
+    <p>Untouched: {{ formulario.untouched }}</p>
+</div>
