@@ -50,7 +50,7 @@ export class ModelComponent implements OnInit {
     const min = 18;
     const max = 65;
 
-    if(value >= 18 && value <=65){
+    if(value >= min && value <=max){
       return null;
     }
     else{

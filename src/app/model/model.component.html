@@ -2,26 +2,55 @@
     <div class="form-group">
         <label>Nombre</label>
         <input type="text" class="form-control" formControlName="nombre">
+
+        <!--El "?" es para indicar que cuando formulario.controls.nombre.errors sea null, no se ejecute-->
+        <div class="error" *ngIf="formulario.controls.nombre.errors?.required && 
+        formulario.controls.nombre.touched">
+            El nombre es requerido
+        </div>
+
+        <div class="error" *ngIf="formulario.controls.nombre.errors.minlength &&
+        formulario.controls.nombre.touched">
+            El campo debe tener al menos {{formulario.controls.nombre.errors.minlength.requiredLength}} caracteres
+        </div>
+
+        <p>Errors: {{formulario.controls.nombre.errors | json}}</p>
+        
+        <!-- Indica si el campo es válido -->
         <div>
-            <!--Indica si el campo es válido-->
             <p>Valid: {{ formulario.controls.nombre.valid }}</p>
         </div>
     </div>
     <div class="form-group">
         <label>Apellido</label>
         <input type="text" class="form-control" formControlName="apellido">
+        <div class="error" *ngIf="formulario.controls.apellido.errors?.maxlength && 
+        formulario.controls.apellido.touched">
+            El campo debe tener menos de {{formulario.controls.apellido.errors.maxlength.requiredLength}} caracteres
+        </div>
     </div>
     <div class="form-group">
         <label>Edad</label>
         <input type="text" class="form-control" formControlName="edad">
+        <div class="error" *ngIf="formulario.controls.edad.errors?.edadValidator &&
+        formulario.controls.edad.touched">
+            El campo edad debe estar entre {{formulario.controls.edad.errors.edadValidator.min}}
+            y {{formulario.controls.edad.errors.edadValidator.max}} años
+        </div>
     </div>
     <div class="form-group">
         <label>Email</label>
         <input type="text" class="form-control" formControlName="email">
+        <div class="error" *ngIf="formulario.controls.email.errors && formulario.controls.email.touched">
+            El campo es erroneo
+        </div>
     </div>
     <div class="form-group">
         <label>DNI</label>
         <input type="text" class="form-control" formControlName="dni">
+        <div class="error" *ngIf="formulario.controls.dni.errors && formulario.controls.dni.touched">
+            El campo es erroneo
+        </div>
     </div>
     <div class="form-group">
         <label>Password</label>
