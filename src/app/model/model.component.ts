@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-model',
@@ -38,6 +39,11 @@ export class ModelComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    //esto capta los cambios del campo email, para por ejemplo, comprobar si es un email cargado en la BD
+    const emailControl = this.formulario.controls.email;
+    emailControl.valueChanges.pipe(debounceTime(500)).subscribe(value => { //debounceTime(500) comprueba cada 5seg los cambios realizados (para no estar todo el tiempo "controlado")
+      console.log(value);
+    });
   }
 
   onSubmit(){
